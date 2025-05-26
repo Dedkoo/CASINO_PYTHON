@@ -1,1 +1,0 @@
-First bigger project. Main goal was to create a casino with some fun games and working budget. First file is the first version, with main purpose was to get the logic right. Second file was just getting it to OPP form. In future maybe adding some more features as budget will be saved to file and working after quitting, or some more games.
