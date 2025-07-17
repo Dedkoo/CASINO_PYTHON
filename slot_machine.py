@@ -3,10 +3,15 @@ import random
 
 class Machine:
     
-    def __init__(self):
-        self.symbols = ["🍇","🍉","🍒","🍊"]
+    def __init__(self) -> None:
+        # Symbols for the game.
+        self.symbols= ["🍇","🍉","🍒","🍊"]
                             
-    def play(self,balance):
+    def play(self,balance: int) -> int:
+        """
+        Run a game of 4 Fruits slot machine.
+        Accepts player's current balance and returns the updated balance.
+        """
         time.sleep(1)
         print("\n-----WELCOME TO 4 FRUITS!-----\n")
         time.sleep(1)
@@ -20,15 +25,18 @@ class Machine:
                 return balance
             else:
                 (f"\nYOU ARE BETTING ${new_bet}!\n")
-                
+
+            # Generate 3x3 symbols.
             random_symbol_row_one = [random.choice(self.symbols) for _ in range(3)]
             random_symbol_row_two = [random.choice(self.symbols) for _ in range(3)]
             random_symbol_row_three = [random.choice(self.symbols) for _ in range(3)]
         
+            # Display slot machine.
             print(" | ".join(random_symbol_row_one))
             print(" | ".join(random_symbol_row_two))
             print(" | ".join(random_symbol_row_three))
-
+            
+            # Check win conditions: rows and diagonals
             if random_symbol_row_one[0] == random_symbol_row_one[1] == random_symbol_row_one[2] or random_symbol_row_two[0] == random_symbol_row_two[1] == random_symbol_row_two[2] or random_symbol_row_three[0] == random_symbol_row_three[1] == random_symbol_row_three[2]:
                 print("\nYOU WIN!\n")
                 win = new_bet * 3

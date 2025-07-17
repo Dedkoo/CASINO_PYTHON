@@ -6,25 +6,31 @@ import time
 
 class Casino:
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """Initializing casino with starting account and balance budget."""
+        # Account status.
         self.account = 5000
+        # Casino balance status.
         self.balance = 1000
 
-    def show_account(self):
+    def show_account(self) -> None:
+        """Display user`s account status."""
         time.sleep(1)
         print(f"\nYOUR BALANCE ON YOUR ACCOUNT IS: ${self.account}.")
         time.sleep(1)
         self.exiting_msg()
         time.sleep(1)
     
-    def show_balance(self):
+    def show_balance(self) -> None:
+        """"Display casino balance status."""
         time.sleep(1)
         print(f"\nYOUR CURRENT BALANCE IS: ${self.balance}.")
         time.sleep(1)
         self.exiting_msg()
         time.sleep(1)
     
-    def show_credits(self):
+    def show_credits(self) -> None:
+        """Show credits and developer info."""
         print("\n-----------------------------")
         time.sleep(1)
         print("-THIS CASINO WAS CREATED BY:-")
@@ -40,11 +46,13 @@ class Casino:
         self.exiting_msg()
         time.sleep(1)
 
-    def exiting_msg(self):
+    def exiting_msg(self) -> None:
+        """Display returning message."""
         print("\nRETURNING TO MENU...")
         time.sleep(1)
 
     def deposit_func(self):
+        """"Handles transactions from account to balance."""
         time.sleep(1)
         deposit = int(input("\nHOW MUCH WOULD YOU LIKE TO DEPOSIT?: $"))
         if deposit > self.account:
@@ -60,7 +68,8 @@ class Casino:
             time.sleep(1)
             self.exiting_msg()
     
-    def withdraw_func(self):
+    def withdraw_func(self) -> None:
+        """Handles withdraw from balance to account."""
         time.sleep(1)
         withdraw_amount = int(input("\nHOW MUCH WOULD YOU LIKE TO WITHDRAW?: $"))
         if withdraw_amount > self.balance:
@@ -75,7 +84,8 @@ class Casino:
             time.sleep(1)
             self.exiting_msg()
 
-    def run(self):
+    def run(self) -> None:
+        """Run the casino main loop and menu."""
         while True:
             time.sleep(1)
             print("\n----DEDE CASINO----")

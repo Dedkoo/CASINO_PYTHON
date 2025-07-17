@@ -3,26 +3,38 @@ import random
 
 class Roulette:
 
-    def __init__(self):
+    def __init__(self) -> None:
+        # Choices for color roulette and jackpot games- option 1 and 5.
         self.roulette = ["RED", "BLACK"]
+        # Choices for even/odd roulette game - option 2.
         self.numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
                         26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+        # Choices for 18/36 roulette game - option 3.
         self.one_to_eighteen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
         self.nineteen_to_thirtysix = [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+        # Choice for bot to random pick.
         self.total = [self.one_to_eighteen, self.nineteen_to_thirtysix]
+        # Choices for 2TO1 game - option 6.
         self.one_twelve1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
         self.one_twelve2 = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
         self.one_twelve3 = [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+        # Choice for bot to random pick.
         self.total_one_twelve = [self.one_twelve1, self.one_twelve2, self.one_twelve3]
+        # Choices for 12/12/12 game - option 4.
         self.two_to_one1 = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34]
         self.two_to_one2 = [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35]
         self.two_to_one3 = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36]
+        # Choice for bot to random pick.
         self.total_two_to_one = [self.two_to_one1, self.two_to_one2, self.two_to_one3]
 
-    def play(self, balance):
-
+    def play(self, balance: int) -> int:
+            """
+            Main roulette menu and play functions.
+            With win logic, deposit logic etc...
+            """
             print("\n-----WELCOME TO THE GRAND ROULETTE!-----\n")
             time.sleep(1)
+            # Player deposit.
             new_bet = int(input("\nHOW MUCH WOULD YOU LIKE TO BET? ENTER 0 TO QUIT: $"))
             if new_bet > balance:
                 time.sleep(1)
@@ -36,12 +48,14 @@ class Roulette:
                 time.sleep(1)
                 (f"\nYOU ARE BETTING ${new_bet}!\n")
 
+            # Game picker 1-6.
             time.sleep(1)
             choice = input("\nWHAT TO BET ON? 1:COLOR - 2:EVEN/ODD - 3.18/36 - 4.12/12/12 - 5.JACKPOT - 6.2TO1: ")
 
             if choice == "1":
                 time.sleep(1)
-                choice = input("\nCHOOSE YOUR COLOR (RED-BLACK): ")
+                #Player choice.
+                choice = input("\nCHOOSE YOUR COLOR (RED-BLACK): ").upper()
                 if choice == "RED":
                     time.sleep(1)
                     print("\nYOU CHOSE COLOR RED!")
@@ -53,6 +67,7 @@ class Roulette:
                     time.sleep(1)
                     return 
 
+                # Bot random choice red/black.
                 bot_choice = random.choice(self.roulette)
                 time.sleep(1)
                 print(f"\nBOT HAS CHOSEN: COLOR {bot_choice}!")
@@ -74,10 +89,12 @@ class Roulette:
 
             elif choice == "2":
                 time.sleep(1)
+                #Player choice.
                 choice_of_numbers = input("\nEVEN OR ODD NUMBER: ")
                 bot_choice = random.choice(self.numbers)
                 time.sleep(1)
-
+                
+                # Game getting random number and finding if its even/odd.
                 if choice_of_numbers == "EVEN" and bot_choice % 2 == 0:
                     time.sleep(1)
                     print(f"\nBOT HAS CHOSEN EVEN NUMBER: {bot_choice}")
@@ -105,6 +122,7 @@ class Roulette:
                     return balance
 
             elif choice == "3":
+                #Player choice.
                 choice = random.choice(self.total)
                 time.sleep(1)
                 player_choice = input("\nCHOOSE: 1. 18 - 2. 36: ")
@@ -116,6 +134,7 @@ class Roulette:
                     time.sleep(1)
                     print("\nBOT HAS CHOSEN 19-36!")
 
+                # Win / lose logic.
                 if choice == self.one_to_eighteen and player_choice == "18":
                     time.sleep(1)
                     print("\nYOU WIN!")
@@ -139,10 +158,13 @@ class Roulette:
                     return balance
 
             elif choice == "4":
+                # Bot choice.
                 choice_bot = random.choice(self.total_one_twelve)
                 time.sleep(1)
+                #Player choice.
                 choice_player = input("\nCHOOSE: 1. 1-12 - 2. 13-24 - 3. 25-36: ")
 
+                # Getting bot choice info.
                 if choice_bot == self.one_twelve1:
                     time.sleep(1)
                     print("\nBOT HAS CHOSEN 1-12!")
@@ -153,6 +175,7 @@ class Roulette:
                     time.sleep(1)
                     print("\nBOT HAS CHOSEN 25-36")
 
+                # Win / lose logic.
                 if choice_player == "1" and choice_bot == self.one_twelve1:
                     time.sleep(1)
                     print("\nYOU WIN!")
@@ -186,8 +209,11 @@ class Roulette:
                 time.sleep(1)
                 print("YOU CHOSE JACKPOT (0)!")
                 player_choice = 0
+                # Bot choice.
                 bot_choice = random.choice(self.numbers)
                 print(f"BOT HAS CHOSEN NUMBER: {bot_choice}")
+                
+                # Win / lose logic.
                 if player_choice == bot_choice:
                     time.sleep(1)
                     print("YOU WIN JACKPOT!")
@@ -206,6 +232,7 @@ class Roulette:
 
             elif choice == "6":
                 time.sleep(1)
+                #Player choice.
                 choice = input("CHOOSE: 1.FIRST 2TO1 - 2.SECOND 2TO1 - 3. THIRD 2TO1: ")
                 if choice == "1":
                     time.sleep(1)
@@ -218,8 +245,10 @@ class Roulette:
                     time.sleep(1)
                     print("YOU CHOSE THIRD 2TO1!")
 
+                # Bot random choice.
                 bot_choice = random.choice(self.total_two_to_one)
 
+                # Win / lose logic.
                 if choice == "1" and bot_choice == self.two_to_one1:
                     time.sleep(1)
                     print(f"BOT HAS CHOSEN: FIRST 2TO1!")
